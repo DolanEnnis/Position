@@ -1,0 +1,159 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<!--Version 0.3 Revision Start 7/11/15 -->
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Brian's WP Web Project</title>
+        <link rel="shortcut icon" href="pilot_flag.ico" />
+        <link type="text/css" rel="stylesheet" href="css/bootstrap.css"/>
+        <link type="text/css" rel="stylesheet" href="css/stylesheet.css"/>
+        <!-- import jQuery -->
+		<script src="js/jquery-2.1.4.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDA7XS-zaOCSg-ldJKFzxkYbHhZxO5UyR4&libraries=geometry&callback=initMap">
+    </script>
+		<script src="js/scripy.js"></script>
+    </head>
+    <body>
+    	<nav class="navbar navbar-default navbar-fixed-top">
+    		<div class="container-fluid">
+  
+      <!-- start collapsed navbar-->
+      			<div class="navbar-header">
+        			<button 
+			     	   	type="button" 
+			     	   	class="navbar-toggle collapsed" 
+				       	data-toggle="collapse" 
+   						data-target="#main_navbar" 
+        				aria-expanded="false">open!</button>
+      			</div><!-- / collapsed navbar-->
+
+      <!-- start un-collapsed navbar-->
+      			<div 
+         			class="collapse navbar-collapse" 
+         			id="main_navbar">
+        			<ul class="nav navbar-nav">
+          				<li class="active"><a href="index.html">Home</a></li>
+          				<li><a href="daydiarylink.html">Daydairy</a></li>
+          				<li><a href="MarineTrafficlink.html">Marine Traffic</a></li>
+          				<li><a href="TideLink.html">Tide</a></li>
+          				<li><a href="myTideLink.html">My Tides</a></li>
+          				<li><a href="albums.html">About</a></li>
+        			</ul>
+      			</div><!-- / un-collapsed navbar-->
+
+    		</div> <!-- /container -->
+  		</nav>
+			<header>
+				<h1>Calculate Distance To Kilcreadaun</h1>
+			</header>
+			
+
+			<div class="container">
+				<div class = "col-md-9">
+					<input id="posAsString" type="text">
+				</div>
+				<div class = "col-md-1">
+					<button class = "btn btn-primary"type="button" onclick="inputPosition()">Submit</button>
+				</div>
+			</div>
+			
+			<div id="PosAsNav" class="container">
+				<form id="myForm">
+					<div class = "col-md-2">
+						<h4>Latitude</h4>
+						<input type="text" class="Deg" id="lat" value="XX">
+						<span class="Char">&deg;</span>
+						<input type="text" class="Min" id="latMin" value="xx.xxx">
+						<span class="Char">'</span>
+						<input type="text" class="Quad" id="N/S" value="N"> 
+					</div>
+					<div class = "col-md-2">
+						<h4>Longitude</h4>
+						<input type="text" class="Deg" id="long" value="YY">
+						<span class="Char">&deg;</span>
+						<input type="text" class="Min" id="longMin" value="yy.yyy">
+						<span class="Char">'</span>
+						<input type="text" class="Quad" id="E/W" value="W">
+					</div>
+					<div class = "col-md-2">
+						<h4>Speed</h4>
+						<input type="text" class="Deg" id="speed" value="10">
+						<span class="Char">Knots</span>
+					</div>
+					<div class = "col-md-3">
+						<h4>Delay</h4>
+						<input type="text" class="Deg" id="delay" value="0">
+						<span class="Char">Min</span>
+					</div>
+					<div class = "col-md-1">
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+						<button class = "btn btn-primary" type="button" onclick="main()">RE-SUBMIT</button>
+					</div>
+				</form>	
+			</div>
+			
+			
+			<div class="container">
+				<div class="row">
+					<div class = "col-md-4">
+						<table class="table">
+							<tbody>
+								<tr>
+									<td>From</td>
+									<td id="timeSeen"></td>
+								</tr>
+								<tr>
+									<td>Next Waypoint</td>
+									<td id = "WP"></td>
+								</tr>	
+								<tr>
+									<td>Distance to WP</td>
+									<td id = "WPdist"></td>	
+								</tr>
+								<tr>
+									<td>Distance to Kilcreadan</td>
+									<td id = "KillDist"></td>
+								</tr>
+								<tr>
+									<td>&nbsp;</td>
+								</tr>
+								<tr>
+									<td>Time to Kilcreadan</td>
+									<td> <span id = "KillTime"></span> hrs</td>
+								</tr>	
+								<tr>
+									<td>ETA Kilcreadan</td>
+									<td id = "ETAKil"></td>
+								</tr>	
+								<tr>
+									<td>ETA Scattery</td>
+									<td id = "ETAScattery"></td>
+								</tr>	
+							</tbody>
+						</table>
+					</div>
+					<div class = "col-md-8" id="map"></div>
+						
+							
+						
+						</div>
+					</div>
+					<!-- /Code below puts marine traffic in bottom window 
+				<iframe id = "bottom-window" src ="http://www.marinetraffic.com/en/ais/home/centerx:-10/centery:52/zoom:9">
+					<p>Sorry browser does not support iframes</p>
+				</iframe>
+				-->
+				<div class="navbar navbar-fixed-bottom">
+					<div id="footer">
+						<p>
+							&copy; Copyright  by Brian (2015)
+						</p>
+					</div>
+				</div>
+			
+	</body>
+</html>
