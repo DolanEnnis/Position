@@ -19,20 +19,20 @@
     <body>
     	<nav class="navbar navbar-default navbar-fixed-top">
     		<div class="container-fluid">
-  
+
       <!-- start collapsed navbar-->
       			<div class="navbar-header">
-        			<button 
-			     	   	type="button" 
-			     	   	class="navbar-toggle collapsed" 
-				       	data-toggle="collapse" 
-   						data-target="#main_navbar" 
+        			<button
+			     	   	type="button"
+			     	   	class="navbar-toggle collapsed"
+				       	data-toggle="collapse"
+   						data-target="#main_navbar"
         				aria-expanded="false">open!</button>
       			</div><!-- / collapsed navbar-->
 
       <!-- start un-collapsed navbar-->
-      			<div 
-         			class="collapse navbar-collapse" 
+      			<div
+         			class="collapse navbar-collapse"
          			id="main_navbar">
         			<ul class="nav navbar-nav">
           				<li class="active"><a href="index.html">Home</a></li>
@@ -49,7 +49,7 @@
 			<header>
 				<h1>Calculate Distance To Kilcreadaun</h1>
 			</header>
-			
+
 
 			<div class="container">
 				<div class = "col-md-9">
@@ -59,7 +59,7 @@
 					<button class = "btn btn-primary"type="button" onclick="inputPosition()">Submit</button>
 				</div>
 			</div>
-			
+
 			<div id="PosAsNav" class="container">
 				<form id="myForm">
 					<div class = "col-md-2">
@@ -68,7 +68,7 @@
 						<span class="Char">&deg;</span>
 						<input type="text" class="Min" id="latMin" value="xx.xxx">
 						<span class="Char">'</span>
-						<input type="text" class="Quad" id="N/S" value="N"> 
+						<input type="text" class="Quad" id="N/S" value="N">
 					</div>
 					<div class = "col-md-2">
 						<h4>Longitude</h4>
@@ -93,10 +93,10 @@
 						<p>&nbsp;</p>
 						<button class = "btn btn-primary" type="button" onclick="main()">RE-SUBMIT</button>
 					</div>
-				</form>	
+				</form>
 			</div>
-			
-			
+
+
 			<div class="container">
 				<div class="row">
 					<div class = "col-md-4">
@@ -109,10 +109,10 @@
 								<tr>
 									<td>Next Waypoint</td>
 									<td id = "WP"></td>
-								</tr>	
+								</tr>
 								<tr>
 									<td>Distance to WP</td>
-									<td id = "WPdist"></td>	
+									<td id = "WPdist"></td>
 								</tr>
 								<tr>
 									<td>Distance to Kilcreadan</td>
@@ -124,29 +124,31 @@
 								<tr>
 									<td>Time to Kilcreadan</td>
 									<td> <span id = "KillTime"></span> hrs</td>
-								</tr>	
+								</tr>
 								<tr>
 									<td>ETA Kilcreadan</td>
 									<td id = "ETAKil"></td>
-								</tr>	
+								</tr>
 								<tr>
 									<td>ETA Scattery</td>
 									<td id = "ETAScattery"></td>
-								</tr>	
+								</tr>
 							</tbody>
 						</table>
+            <table class="table">
+              <div id ="varSpeed">
+              </div>
+            </table>
 					</div>
+
 					<div class = "col-md-8" id="map"></div>
-						
-							
-						
+
 						</div>
 					</div>
-					<!-- /Code below puts marine traffic in bottom window 
-				<iframe id = "bottom-window" src ="http://www.marinetraffic.com/en/ais/home/centerx:-10/centery:52/zoom:9">
-					<p>Sorry browser does not support iframes</p>
-				</iframe>
-				-->
+
+
+
+
 				<div class="navbar navbar-fixed-bottom">
 					<div id="footer">
 						<p>
@@ -154,6 +156,6 @@
 						</p>
 					</div>
 				</div>
-			
+
 	</body>
 </html>

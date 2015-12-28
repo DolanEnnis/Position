@@ -66,7 +66,7 @@ guard(50.34487,-5.89052,"Fastnet"),
 guard(49.9959,-5.88660,"BANN SHOAL BUOY"),
 guard(49.89867,-5.20582,"Wolf Rock"),
 guard(50.52974,-0.05317,"Lizard"),
-guard(49.72,-6.6418,"Bull"),	
+guard(49.72,-6.6418,"Bull"),
 guard(49.99,-5.89,"Scilly"),];
 
 var map;
@@ -74,9 +74,9 @@ function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 52.5, lng: -9.71},
     zoom: 7,
-    mapTypeId: google.maps.MapTypeId.TERRAIN 
+    mapTypeId: google.maps.MapTypeId.TERRAIN
   });
-mapWaypoints(waypoints);	
+mapWaypoints(waypoints);
 
 
 }
@@ -89,7 +89,7 @@ function waypoint(name , lat, longtit,distToKil, useWaypoint){
     this.distToKil = distToKil;
     this.useWaypoint = useWaypoint||name;
   }
-  
+
 function guard(lat,longtit,useWaypoint){
 	return new waypoint("guard "+useWaypoint,lat,longtit,1000000,useWaypoint);
 }
@@ -106,9 +106,9 @@ function mapWaypoints(waypoints){
 			markerOptions.icon = {path: google.maps.SymbolPath.CIRCLE,scale: 3};
 			}
 		var marker = new google.maps.Marker(markerOptions);
-		marker.setMap(map); 
+		marker.setMap(map);
   		// Set up listner so that clicking marker changes MRWP
-  			
+
 		marker.addListener('click', function() {
    				var markerPos = this.getPosition();
    				output.mrwp = nextWP(markerPos,waypoints);
@@ -153,7 +153,7 @@ function main() {
 	output.lastSeen = new Date(now.getTime() - input.delay);
 	var latmin =(document.getElementById("latMin").value)/60;
 	input.lat = document.getElementById("lat").value;
-	input.lat = (input.lat/1)+latmin; 
+	input.lat = (input.lat/1)+latmin;
 	input.longtitude = document.getElementById("long").value;
 	var longmin = (document.getElementById("longMin").value)/60;
 	input.longtitude = input.longtitude/1 + longmin;
@@ -166,17 +166,17 @@ function main() {
     	position: shipPos
 	};
 	var marker = new google.maps.Marker(markerOptions);
-	marker.setMap(map); 
-	
+	marker.setMap(map);
+
 	// change zoom level of map
 	var KilcreadaunPos = new google.maps.LatLng(waypoints[0].lat,waypoints[0].longtit);
 	var bounds = new google.maps.LatLngBounds();
 	bounds.extend(KilcreadaunPos);
 	bounds.extend(shipPos);
 	map.fitBounds(bounds);
-	
-	output.mrwp = nextWP(shipPos,waypoints);	
-	
+
+	output.mrwp = nextWP(shipPos,waypoints);
+
 	mainOutput();
 	}
 
@@ -203,10 +203,10 @@ function nextWP(loc,waypoints){
         /**var dist = loc.GetDistanceTo(point.lat ,point.longtit );*/
         if (dist < nearestDist){
             nearestDist = dist;
-            nearWP = point;        
+            nearWP = point;
         }
         }
-        
+
     return nearWP;
 }
 
@@ -224,12 +224,12 @@ function pickWP(wp,waypoints) {
 function mainOutput(){
 	var appropriateWP = pickWP(output.mrwp,waypoints);
 	//clear old lines
-	for (i=0; i<line.length; i++) 
-		{                           
+	for (i=0; i<line.length; i++)
+		{
   			line[i].setMap(null); //or line[i].setVisible(false);
 		}
 	//draw line from ship to first WP
-	
+
 	var legCoordinates = [
     	 {lat: appropriateWP.lat, lng: appropriateWP.longtit},
     	shipPos];
@@ -242,17 +242,17 @@ function mainOutput(){
   	});
 	line.push(firstLeg);
   	firstLeg.setMap(map);
-	 
-	
+
+
 	input.speed = document.getElementById("speed").value;
-	
+
 	output.dToWP = distanceInNM(shipPos,appropriateWP);
 	output.dToKil  = output.dToWP + appropriateWP.distToKil;
 	output.tToKil = output.dToKil/input.speed;
 	output.ETAKil = new Date (output.lastSeen.getTime() + (output.tToKil*60*60*1000));
 	//Time to scattery!
 	output.ETAScattery = new Date (output.lastSeen.getTime()+((output.dToKil+8.8)/input.speed)*60*60*1000);
-	
+
 	document.getElementById("WPdist").innerHTML = output.dToWP.toFixed(1);
 	document.getElementById("KillDist").innerHTML = output.dToKil.toFixed(1);
 	document.getElementById("KillTime").innerHTML = output.tToKil.toFixed(2);
@@ -264,13 +264,16 @@ function mainOutput(){
 }
 
 function tableOutput(){
-	var speedDiff = [ 
-		-2,-1.5,-1,-0.75,-0.5,-0.25,0,0.25,0.5,0.75,1,1.5,2
+	var speedDiff = [
+		-2,-1.5,-1,-0.75,-0.5,-0.25,0,0.25,0.5,0.75,1,1.5,2,3
 	];
-	
+
 	var speedRange = [];
 	var etaKilRange  = [];
 	var etaScatteryRange = [];
+	// declare html variable (a string holder):
+	var html = '<tr><th>Speed  </th><th class="speedTable">ETA</th> <th class="speedTable">ETA<th></tr>';
+	html += '<tr><th></th><th class="speedTable">Kilcreadaun</th> <th class="speedTable">Scattery<th></tr>'
 	for (i=0; i<speedDiff.length; i++){
 		speedRange.push(parseFloat(input.speed) + speedDiff[i]);
 		etaKilRange.push(
@@ -279,7 +282,11 @@ function tableOutput(){
 		etaScatteryRange.push(
 (new Date (output.lastSeen.getTime()+((output.dToKil+8.8)/speedRange[i])*60*60*1000)).toTimeString().substring(0, 5)
 		);
+		html += "<tr><td class='speedClass'>"+speedRange[i]+"  Kts  "+"</td><td>"+etaKilRange[i]+"</td><td>"+etaScatteryRange[i]+"</td></tr>"
 	};
 	console.log(etaScatteryRange);
-	
+	//append created html to the table body:
+	$('#varSpeed').html(html);
+
+
 }
